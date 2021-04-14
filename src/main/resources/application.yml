@@ -1,0 +1,13 @@
+nacos:
+  config:
+    server-addr: 47.96.106.160:8848
+    username: nacos
+    password: nacos
+    namespace: bb24d2e4-eea6-4604-ac2c-7ca82213d03d
+    type: yaml
+    context-path: /nacos
+    auto-refresh: true
+    data-id: miaoshaconfig
+    bootstrap:
+      enable: true
+    remote-first: true
