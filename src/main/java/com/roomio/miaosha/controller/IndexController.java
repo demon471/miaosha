@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
  * @author biqiang
  * @version 2021/4/14
  * @Description:
+ * @apiNote @Controller 用于返回页面 @RestController作为纯接口服务
  */
 
 @Controller
