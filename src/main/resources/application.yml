@@ -1,6 +1,7 @@
 nacos:
   config:
-    server-addr: 47.96.106.160:8848
+    #server-addr: 47.96.106.160:8848
+    server-addr: 192.168.62.129:8848
     username: nacos
     password: nacos
     namespace: bb24d2e4-eea6-4604-ac2c-7ca82213d03d
@@ -11,3 +12,5 @@ nacos:
     bootstrap:
       enable: true
     remote-first: true
+
+

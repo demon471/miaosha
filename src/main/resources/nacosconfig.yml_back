@@ -1,0 +1,16 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /miaosha
+spring:
+  application:
+    name: /miaosha
+  thymeleaf:
+    suffix: .html
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+    cache: false
+    mode: HTML
+    prefix: classpath:/templates/
+
