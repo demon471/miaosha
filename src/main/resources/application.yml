@@ -13,4 +13,11 @@ nacos:
       enable: true
     remote-first: true
 
-
+logging:
+  level:
+    com.roomio.miaosha: debug
+  config: classpath:logback-spring.xml
+  #windows
+  path: E:/logs/miaosha
+  #unix
+  #path: /tmp/logs/miaosha
