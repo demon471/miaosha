@@ -1,7 +1,11 @@
 nacos:
   config:
+    #aliyun
     #server-addr: 47.96.106.160:8848
-    server-addr: 192.168.62.129:8848
+    #com
+    #server-addr: 192.168.62.129:8848
+    #mac
+    server-addr: 172.16.224.2:8848
     username: nacos
     password: nacos
     namespace: bb24d2e4-eea6-4604-ac2c-7ca82213d03d
@@ -18,6 +22,8 @@ logging:
     com.roomio.miaosha: debug
   config: classpath:logback-spring.xml
   #windows
-  path: E:/logs/miaosha
-  #unix
+  #path: E:/logs/miaosha
+  #mac
+  path: /Users/roomio/logs/miaosha
+  #linux
   #path: /tmp/logs/miaosha
