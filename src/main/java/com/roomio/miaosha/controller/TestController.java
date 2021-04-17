@@ -1,8 +1,10 @@
 package com.roomio.miaosha.controller;
 
 import com.roomio.miaosha.domain.User;
+import com.roomio.miaosha.redis.UserKey;
 import com.roomio.miaosha.result.CodeMsg;
 import com.roomio.miaosha.result.Result;
+import com.roomio.miaosha.service.RedisService;
 import com.roomio.miaosha.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +29,9 @@ public class TestController {
 
     @Autowired
     UserService service;
+
+    @Autowired
+    RedisService redisService;
 
     @GetMapping("/list")
     public String getindex(ModelMap modelMap){
@@ -65,6 +70,18 @@ public class TestController {
     public Boolean tx() {
         service.insert();
         return true;
+    }
+
+
+    @RequestMapping(value = "/testredis",method = RequestMethod.POST)
+    @ResponseBody
+    public Result<Boolean> testredis() {
+        User u1= new User(1,"zhangsan",17);
+        User u2= new User(2,"lisi",27);
+        redisService.set(UserKey.getById,""+u1.getId(),u1);
+        redisService.set(UserKey.getById,""+u2.getId(),u2);
+
+        return Result.success(true);
     }
 
 }
