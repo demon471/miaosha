@@ -1,6 +1,8 @@
 package com.roomio.miaosha.controller;
 
 import com.roomio.miaosha.domain.User;
+import com.roomio.miaosha.result.CodeMsg;
+import com.roomio.miaosha.result.Result;
 import com.roomio.miaosha.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author biqiang
@@ -42,4 +46,25 @@ public class TestController {
         modelMap.put("username", user.getName());
         return "page/index1.html";
     }
+
+    @RequestMapping(value = "/hello",method = RequestMethod.POST)
+    @ResponseBody
+    public Result<User> hello() {
+        User user = service.getuserById(1);
+        return Result.success(user);
+    }
+
+    @RequestMapping(value = "/helloerror",method = RequestMethod.POST)
+    @ResponseBody
+    public Result<User> helloerror() {
+        return Result.error(CodeMsg.SERVER_ERROR);
+    }
+
+    @RequestMapping(value = "/tx",method = RequestMethod.POST)
+    @ResponseBody
+    public Boolean tx() {
+        service.insert();
+        return true;
+    }
+
 }
