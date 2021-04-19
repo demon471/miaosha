@@ -1,4 +1,6 @@
-package com.roomio.miaosha.redis;
+package com.roomio.miaosha.redis.keys;
+
+import com.roomio.miaosha.redis.BasePrefix;
 
 /**
  * @author roomio
@@ -6,7 +8,7 @@ package com.roomio.miaosha.redis;
  * @Description:
  * @Copyright (C)2021
  */
-public class UserKey extends BasePrefix{
+public class UserKey extends BasePrefix {
 
     public UserKey(String prefix) {
         super(prefix);

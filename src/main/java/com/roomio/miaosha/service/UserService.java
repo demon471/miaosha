@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class UserService {
     @Autowired
@@ -20,5 +22,8 @@ public class UserService {
         User u2= new User(1,"sda",28);
         dao.insert(u2);
         return true;
+    }
+    public List<User> getAlluerInTable(){
+        return dao.getAlluerInTable();
     }
 }
