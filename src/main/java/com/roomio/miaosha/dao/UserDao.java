@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper
 public interface UserDao {
     @Select("select * from users where id=#{id}")
-    public User getuserById(@Param("id") int id);
+    public User getuserById(@Param("id") String id);
 
     @Insert("insert users(id,name,age) values(#{id},#{name},#{age})")
     boolean insert(User user);

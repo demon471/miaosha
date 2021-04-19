@@ -12,7 +12,7 @@ import java.util.List;
 public class UserService {
     @Autowired
     UserDao dao;
-    public User getuserById(int id){
+    public User getuserById(String id){
       return  dao.getuserById(id);
     }
     @Transactional

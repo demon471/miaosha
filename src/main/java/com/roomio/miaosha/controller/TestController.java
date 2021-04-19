@@ -1,5 +1,6 @@
 package com.roomio.miaosha.controller;
 
+import com.alibaba.druid.util.StringUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.roomio.miaosha.domain.User;
@@ -13,11 +14,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,14 +45,14 @@ public class TestController {
         logger.error("errorinfo","errorrrrrrrrrrrrrrrrrrr!");
         logger.info("info","infoooooooooo!");
         logger.warn("warninfo","warnnnnnnnnnnnnn!");
-        User user= service.getuserById(1);
+        User user= service.getuserById("1");
 
         return "page/index";
     }
 
     @GetMapping("/user")
     public String getUser(ModelMap modelMap) {
-        User user = service.getuserById(1);
+        User user = service.getuserById("1");
         modelMap.put("username", user.getName());
         return "page/index1.html";
     }
@@ -60,7 +60,7 @@ public class TestController {
     @RequestMapping(value = "/hello",method = RequestMethod.POST)
     @ResponseBody
     public Result<User> hello() {
-        User user = service.getuserById(1);
+        User user = service.getuserById("1");
         return Result.success(user);
     }
 
@@ -94,17 +94,16 @@ public class TestController {
 
     @RequestMapping(value = "/getInforedis",method = RequestMethod.POST)
     @ResponseBody
-    public Result<List<User>> getInforedis() {
+    public Result<List<User>> getInforedis(@RequestParam(name = "ids") String Ids[]) {
         List<User> list =new ArrayList<User>();
-
-        User user= redisService.get(UserKey.getById,"1",User.class);
-        list.add(user);
-       user= redisService.get(UserKey.getById,"2",User.class);
-        list.add(user);
-        user= redisService.get(UserKey.getById,"3",User.class);
-        list.add(user);
-        user= redisService.get(UserKey.getById,"4",User.class);
-        list.add(user);
+        for (String id : Ids) {
+            User user= redisService.get(UserKey.getById,id,User.class);
+            if(user==null){
+                user=service.getuserById(id);
+                redisService.set(UserKey.getById,""+user.getId(),user);
+            }
+            list.add(user);
+        }
         return Result.success(list);
     }
 }
