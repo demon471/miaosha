@@ -75,3 +75,6 @@ spring:
         login-username: admin
         allow: 12.0.0.1
         #deny:127.0.0.2
+
+  #MD5加密salt
+MD5SALT: 1a2b3c4d

@@ -1,0 +1,13 @@
+
+-- 创建用户表
+CREATE TABLE `miaosha`.`miaosha_user`  (
+  `id` bigint NOT NULL COMMENT '用户ID,手机号码',
+  `nickname` varchar(255) NOT NULL,
+  `password` varchar(32) NOT NULL COMMENT 'MD5(MD5(pass明文+固定salt)+salt)',
+  `salt` varchar(10) NULL ,
+  `head` varchar(128) NULL COMMENT '头像,云空间ID',
+  `register_date` datetime NULL COMMENT '注册时间',
+  `last_login_date` datetime NULL COMMENT '上次登录时间',
+  `login_count` int NULL COMMENT '登录次数',
+  PRIMARY KEY (`id`)
+);
