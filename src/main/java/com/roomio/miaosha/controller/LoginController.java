@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.validation.Valid;
+
 
 /**
  * @author biqiang
@@ -36,20 +38,17 @@ public class LoginController {
 
     @RequestMapping(value = "/do_login",method = RequestMethod.POST)
     @ResponseBody
-    public Result<Boolean> do_login(LoginVo loginVo){
-            logger.info(loginVo.toString());
-            String inputPass=loginVo.getPassword();
+    public Result<Boolean> do_login(@Valid LoginVo loginVo){
+           logger.info(loginVo.toString());
+             /*String inputPass=loginVo.getPassword();
             String mobile=loginVo.getMobile();
             if(StringUtils.isEmpty(inputPass)){
                 return Result.error(CodeMsg.PASSWORD_EMPTY);
             }
             if(StringUtils.isEmpty(mobile)){
                 return Result.error(CodeMsg.MOBILE_EMPTY);
-            }
-          CodeMsg codeMsg=  service.login(loginVo);
-            if (codeMsg.getCode()==0){
-                return Result.success(true);
-            }
-            return Result.error(codeMsg);
+            }*/
+            service.login(loginVo);
+            return Result.success(true);
     }
 }

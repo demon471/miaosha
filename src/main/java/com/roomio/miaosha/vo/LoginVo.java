@@ -1,5 +1,10 @@
 package com.roomio.miaosha.vo;
 
+import com.roomio.miaosha.validator.IsMobile;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotNull;
+
 /**
  * @author biqiang
  * @version 2021/4/21
@@ -7,7 +12,13 @@ package com.roomio.miaosha.vo;
  * @Copyright (C)2021, Pcitech
  */
 public class LoginVo {
+
+    @NotNull
+    @IsMobile
     private String mobile;
+
+    @NotNull
+    @Length(min = 32)
     private String password;
 
     public String getMobile() {
