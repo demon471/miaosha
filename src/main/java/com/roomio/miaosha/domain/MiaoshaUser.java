@@ -1,5 +1,6 @@
 package com.roomio.miaosha.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -8,7 +9,10 @@ import java.util.Date;
  * @Description:
  * @Copyright (C)2021, Pcitech
  */
-public class MiaoshaUser {
+public class MiaoshaUser implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private Long id;
     private String nickname;
     private String password;

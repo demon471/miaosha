@@ -1,6 +1,11 @@
 package com.roomio.miaosha.domain;
 
-public class MiaoShaOrderInfo {
+import java.io.Serializable;
+
+public class MiaoShaOrderInfo  implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private Long id;
 
     private Long userId;
