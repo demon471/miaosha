@@ -1,11 +1,9 @@
 package com.roomio.miaosha.domain;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class MiaoshaGoods implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class MiaoshaGoods {
     private Long id;
 
     private Long goodsId;

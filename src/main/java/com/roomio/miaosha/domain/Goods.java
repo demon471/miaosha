@@ -1,12 +1,8 @@
 package com.roomio.miaosha.domain;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class Goods  implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
+public class Goods {
     private Integer id;
 
     private String goodsName;

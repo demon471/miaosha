@@ -1,7 +1,9 @@
 package com.roomio.miaosha.controller;
 
 import com.roomio.miaosha.domain.MiaoshaUser;
+import com.roomio.miaosha.service.GoodsService;
 import com.roomio.miaosha.service.MiaoshaUserService;
+import com.roomio.miaosha.vo.GoodsVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * @author biqiang
@@ -26,6 +29,9 @@ public class GoodsController {
     @Autowired
     MiaoshaUserService service;
 
+    @Autowired
+    GoodsService goodsService;
+
     @RequestMapping(value = "/to_list",method = {RequestMethod.GET})
     public String to_list(ModelMap modelMap,
 //                          @CookieValue(value = MiaoshaUserService.COOKI_NAME_TOKEN,required = false) String cookieToken,
@@ -38,6 +44,9 @@ public class GoodsController {
       MiaoshaUser miaoshaUser= service.getByToken(token,response);
       modelMap.put("user",miaoshaUser);*/
         modelMap.put("user",user);
+        //查询产品列表
+        List<GoodsVo> listgoodvo =goodsService.getGoodsVoList();
+        modelMap.put("goodslist",listgoodvo);
         return "page/goods_list";
     }
 
