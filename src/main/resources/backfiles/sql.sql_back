@@ -11,3 +11,58 @@ CREATE TABLE `miaosha`.`miaosha_user`  (
   `login_count` int NULL COMMENT '登录次数',
   PRIMARY KEY (`id`)
 );
+
+--商品表
+CREATE TABLE `miaosha`.`goods`  (
+  `id` int NOT NULL AUTO_INCREMENT COMMENT '商品ID',
+  `goods_name` varchar(16) NULL COMMENT '商品名称',
+  `goods_title` varchar(64) NULL COMMENT '商品标题',
+  `goods_img` varchar(64) NULL COMMENT '商品图片',
+  `goods_detail` longtext NOT NULL COMMENT '商品详情介绍',
+  `goods_price` decimal(10, 2) NULL COMMENT '商品单价',
+  `good_stock` int NULL DEFAULT 0 COMMENT '商品库存，-1表示没有限制',
+  PRIMARY KEY (`id`)
+);
+
+-- 插入两个商品
+INSERT INTO `miaosha`.`goods` (`id`, `goods_name`, `goods_title`, `goods_img`, `goods_detail`, `goods_price`, `good_stock`) VALUES (1, 'iphoneX', 'Apple iPhone X(A1865) 64G 移动联通电信4G手机', '/img/iphonex.png', 'Apple iPhone X(A1865) 64G 移动联通电信4G手机', 8765.00, 10000);
+INSERT INTO `miaosha`.`goods` (`id`, `goods_name`, `goods_title`, `goods_img`, `goods_detail`, `goods_price`, `good_stock`) VALUES (2, '华为Mate9', '华为 Mate9 4GB+32GB版 月光银 移动联调电信4G手机 双卡双待', '/img/meta10.png', '华为 Mate9 4GB+32GB版 月光银 移动联调电信4G手机 双卡双待', 3212.00, -1);
+
+--秒杀商品表
+CREATE TABLE `miaosha`.`miaosha_goods`  (
+  `id` bigint NOT NULL COMMENT '秒杀商品表主键',
+  `goods_id` bigint NOT NULL COMMENT '商品id',
+  `miaosha_price` decimal(10, 2) NULL COMMENT '秒杀价',
+  `stock_count` int NULL COMMENT '库存数量',
+  `start_date` datetime NULL COMMENT '秒杀开始时间',
+  `end_date` datetime NULL COMMENT '秒杀结束时间',
+  PRIMARY KEY (`id`)
+);
+
+--添加被秒杀的商品
+INSERT INTO `miaosha`.`miaosha_goods` (`id`, `goods_id`, `miaosha_price`, `stock_count`, `start_date`, `end_date`) VALUES (1, 1, 0.01, 4, '2021-04-22 16:52:46', '2021-04-23 16:52:49');
+
+--订单表
+CREATE TABLE `miaosha`.`order_info`  (
+  `id` bigint NOT NULL,
+  `user_id` bigint NULL COMMENT '用户id',
+  `goods_id` bigint NULL COMMENT '商品id',
+  `delivery_addr_id` bigint NULL COMMENT '收货地址id',
+  `goods_name` varchar(16) NULL COMMENT '商品名称',
+  `goods_count` int NULL COMMENT '商品数量',
+  `goods_price` decimal(10, 2) NULL COMMENT '商品单价',
+  `order_channel` tinyint NULL DEFAULT 0  COMMENT '1pc,2android,3ios',
+  `status` tinyint NULL COMMENT '订单状态：0新建未支付，1已支付，2已发货，3已收货，4已退款，5已完成',
+  `create_date` datetime NULL COMMENT '订单创建时间',
+  `pay_date` datetime NULL COMMENT '支付时间',
+  PRIMARY KEY (`id`)
+);
+
+-- 秒杀订单表
+CREATE TABLE `miaosha`.`miaosha_order`  (
+  `id` bigint NOT NULL,
+  `user_id` bigint NULL COMMENT '用户id',
+  `order_id` bigint NULL COMMENT '订单id',
+  `goods_id` bigint NULL COMMENT '商品id',
+  PRIMARY KEY (`id`)
+);
