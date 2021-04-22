@@ -1,8 +1,8 @@
 package com.roomio.miaosha.dao;
 
 import com.roomio.miaosha.vo.GoodsVo;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-import org.mapstruct.Mapper;
 
 import java.util.List;
 
