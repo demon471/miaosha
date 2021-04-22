@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 
@@ -38,7 +39,7 @@ public class LoginController {
 
     @RequestMapping(value = "/do_login",method = RequestMethod.POST)
     @ResponseBody
-    public Result<Boolean> do_login(@Valid LoginVo loginVo){
+    public Result<Boolean> do_login(HttpServletResponse response,@Valid LoginVo loginVo){
            logger.info(loginVo.toString());
              /*String inputPass=loginVo.getPassword();
             String mobile=loginVo.getMobile();
@@ -48,7 +49,7 @@ public class LoginController {
             if(StringUtils.isEmpty(mobile)){
                 return Result.error(CodeMsg.MOBILE_EMPTY);
             }*/
-            service.login(loginVo);
+             service.login(response,loginVo);
             return Result.success(true);
     }
 }
