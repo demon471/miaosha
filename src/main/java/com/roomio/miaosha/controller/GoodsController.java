@@ -4,6 +4,8 @@ import com.roomio.miaosha.domain.MiaoshaUser;
 import com.roomio.miaosha.service.GoodsService;
 import com.roomio.miaosha.service.MiaoshaUserService;
 import com.roomio.miaosha.vo.GoodsVo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,6 +27,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/goods")
 public class GoodsController {
+
+    private static final Logger logger = LoggerFactory.getLogger( LoginController.class );
+
 
     @Autowired
     MiaoshaUserService service;
