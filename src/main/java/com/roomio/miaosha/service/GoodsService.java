@@ -1,6 +1,7 @@
 package com.roomio.miaosha.service;
 
 import com.roomio.miaosha.dao.GoodsMapper;
+import com.roomio.miaosha.domain.Goods;
 import com.roomio.miaosha.vo.GoodsVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,10 @@ public class GoodsService {
 
     public List<GoodsVo> getGoodsVoList(){
         return goodsMapper.getGoodsVoList();
+    }
+
+    public GoodsVo getGoodVoById(Integer id){
+        return goodsMapper.getGoodVoById(id);
     }
 
 }

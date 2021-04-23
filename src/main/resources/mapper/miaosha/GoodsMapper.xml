@@ -53,7 +53,14 @@
     <include refid="Blob_Column_List" />
     from miaosha_goods mg LEFT JOIN goods g on mg.goods_id=g.id
   </select>
-
+  <select id="getGoodVoById"  resultMap="GoodsVoResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select
+    <include refid="GoodsVoBase_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from miaosha_goods mg LEFT JOIN goods g on mg.goods_id=g.id
+    where g.id = #{id,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from goods
     where id = #{id,jdbcType=INTEGER}

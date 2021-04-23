@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -55,5 +52,32 @@ public class GoodsController {
         return "page/goods_list";
     }
 
+    @RequestMapping(value = "/to_detail/{goodsId}" ,method = RequestMethod.GET)
+    public String to_detail(ModelMap modelMap, MiaoshaUser user, @PathVariable("goodsId") Integer goodsId) {
+        modelMap.put("user",user);
+        GoodsVo goods= goodsService.getGoodVoById(goodsId);
+        Long startAt=goods.getStartDate().getTime();
+        Long endAt=goods.getEndDate().getTime();
+        Long now= System.currentTimeMillis();
+
+        int remainSeconds=0;
+
+        int miaoshaStatus=0;
+
+        if(now<startAt){//秒杀未开始
+            miaoshaStatus=0;
+            remainSeconds=(int)((startAt-now)/1000);
+        }else if(now>startAt){//已经结束
+            miaoshaStatus=2;
+            remainSeconds=-1;
+        }else{//秒杀正在进行中
+            miaoshaStatus=1;
+            remainSeconds=0;
+        }
+        modelMap.put("goods",goods);
+        modelMap.put("remainSeconds",remainSeconds);
+        modelMap.put("miaoshaStatus",miaoshaStatus);
+        return "page/goods_detail";
+    }
 
 }
