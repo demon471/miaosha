@@ -21,7 +21,7 @@ steps: # 定义流水线执行步骤，这些步骤将顺序执行
     settings:
       host: 192.168.62.129 # 远程连接地址
       username: root # 远程连接账号
-      password:  706495
+      password:
         from_secret: ssh_password # 从Secret中读取SSH密码
       port: 22 # 远程连接端口
       command_timeout: 5m # 远程执行命令超时时间
