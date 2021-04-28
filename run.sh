@@ -17,10 +17,10 @@ echo '----rm image----'
 # 打包编译docker镜像
 docker build -t ${group_name}/${app_name}:${app_version} .
 echo '----build image----'
-docker run -p 8088:8088 --name ${app_name} \
+docker run -p 8080:8080 --name ${app_name}  --net docker-mynet --ip 172.172.0.88 \
 -e TZ="Asia/Shanghai" \
 -v /etc/localtime:/etc/localtime \
 -v /mydata/app/${app_name}/logs:/var/logs \
 -d ${group_name}/${app_name}:${app_version} \
---net docker-mynet --ip 172.172.0.88
+
 echo '----start container----'
