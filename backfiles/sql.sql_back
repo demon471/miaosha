@@ -12,12 +12,12 @@ CREATE TABLE `miaosha`.`miaosha_user`  (
   PRIMARY KEY (`id`)
 );
 
---商品表
+-- 商品表
 CREATE TABLE `miaosha`.`goods`  (
   `id` int NOT NULL AUTO_INCREMENT COMMENT '商品ID',
   `goods_name` varchar(16) NULL COMMENT '商品名称',
   `goods_title` varchar(64) NULL COMMENT '商品标题',
-  `goods_img` varchar(64) NULL COMMENT '商品图片',
+  `goods_img` varchar(255) NULL COMMENT '商品图片',
   `goods_detail` longtext NOT NULL COMMENT '商品详情介绍',
   `goods_price` decimal(10, 2) NULL COMMENT '商品单价',
   `good_stock` int NULL DEFAULT 0 COMMENT '商品库存，-1表示没有限制',
@@ -25,10 +25,10 @@ CREATE TABLE `miaosha`.`goods`  (
 );
 
 -- 插入两个商品
-INSERT INTO `miaosha`.`goods` (`id`, `goods_name`, `goods_title`, `goods_img`, `goods_detail`, `goods_price`, `good_stock`) VALUES (1, 'iphoneX', 'Apple iPhone X(A1865) 64G 移动联通电信4G手机', '/img/iphonex.png', 'Apple iPhone X(A1865) 64G 移动联通电信4G手机', 8765.00, 10000);
+INSERT INTO `miaosha`.`goods` (`id`, `goods_name`, `goods_title`, `goods_img`, `goods_detail`, `goods_price`, `good_stock`) VALUES (1, 'iphoneX', 'Apple iPhone X(A1865) 64G 移动联通电信4G手机', 'http://192.168.62.129:8888/filesystem/file/view/607eda44d60180000141d9ec', 'Apple iPhone X(A1865) 64G 移动联通电信4G手机', 8765.00, 10000);
 INSERT INTO `miaosha`.`goods` (`id`, `goods_name`, `goods_title`, `goods_img`, `goods_detail`, `goods_price`, `good_stock`) VALUES (2, '华为Mate9', '华为 Mate9 4GB+32GB版 月光银 移动联调电信4G手机 双卡双待', '/img/meta10.png', '华为 Mate9 4GB+32GB版 月光银 移动联调电信4G手机 双卡双待', 3212.00, -1);
 
---秒杀商品表
+-- 秒杀商品表
 CREATE TABLE `miaosha`.`miaosha_goods`  (
   `id` bigint NOT NULL COMMENT '秒杀商品表主键',
   `goods_id` bigint NOT NULL COMMENT '商品id',
@@ -39,10 +39,10 @@ CREATE TABLE `miaosha`.`miaosha_goods`  (
   PRIMARY KEY (`id`)
 );
 
---添加被秒杀的商品
+-- 添加被秒杀的商品
 INSERT INTO `miaosha`.`miaosha_goods` (`id`, `goods_id`, `miaosha_price`, `stock_count`, `start_date`, `end_date`) VALUES (1, 1, 0.01, 4, '2021-04-22 16:52:46', '2021-04-23 16:52:49');
 
---订单表
+-- 订单表
 CREATE TABLE `miaosha`.`order_info`  (
   `id` bigint NOT NULL,
   `user_id` bigint NULL COMMENT '用户id',
