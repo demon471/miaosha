@@ -1,13 +1,14 @@
 kind: pipeline # 定义对象类型，还有secret和signature两种类型
 type: docker # 定义流水线类型，还有kubernetes、exec、ssh等类型
-name: mall-tiny-drone # 定义流水线名称
+name: miaosha-drone # 定义流水线名称
 
 steps: # 定义流水线执行步骤，这些步骤将顺序执行
   - name: package # 流水线名称
     image: maven:3-jdk-8 # 定义创建容器的Docker镜像
     volumes: # 将容器内目录挂载到宿主机，仓库需要开启Trusted设置
       - name: maven-cache
-        path: /root/.m2 # 将maven下载依赖的目录挂载出来，防止重复下载
+        host:
+          path: /soft/maven/.m2 # 将maven下载依赖的目录挂载出来，防止重复下载
       - name: maven-build
         path: /app/build # 将应用打包好的Jar和执行脚本挂载出来
     commands: # 定义在Docker容器中执行的shell命令
